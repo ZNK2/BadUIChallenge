@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welcome</title>
+    <style>
+        body {
+            background-color: #ff66cc;
+            color: #00ffcc;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 50px;
+            text-shadow: 3px 3px 5px #0000ff;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 20px;
+            color: #ffcc00;
+        }
+        .form-container {
+            margin-top: 50px;
+            position: relative;
+            height: 70vh;
+        }
+        input[type="text"] {
+            font-size: 20px;
+            padding: 10px;
+            border: 2px solid #ff00ff;
+            background-color: #ffff66;
+            color: #ff0000;
+        }
+        .button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #00ffcc;
+            color: #ff0000;
+            border: 3px solid #ff00ff;
+            cursor: pointer;
+            margin: 10px;
+            position: absolute;
+            transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
+        }
+        .button:hover {
+            background-color: #ff6600;
+        }
+        #hidden-btn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue sur notre magnifique interface !</h1>
+    <p>Pour avoir accès à un océan de connaissances, inscris-toi :</p>
+    <div class="form-container">
+        <input type="text" id="username" placeholder="Entre ton pseudo !" aria-label="Username" />
+        <button class="button">Confirmer :p</button>
+        <button class="button">Confirmer :p</button>
+        <button id="hidden-btn" class="button">Confirmer :p</button>
+    </div>
+    <script>
+        const formContainer = document.querySelector('.form-container');
+        const buttons = document.querySelectorAll('.button');
+        const hiddenButton = document.getElementById("hidden-btn");
+        const input = document.getElementById("username");
+
+        function moveButtons() {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            buttons.forEach(button => {
+                const buttonWidth = button.offsetWidth;
+                const buttonHeight = button.offsetHeight;
+
+                const maxX = windowWidth - buttonWidth;
+                const maxY = windowHeight - buttonHeight;
+
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+
+                button.style.left = `${randomX}px`;
+                button.style.top = `${randomY}px`;
+            });
+        }
+
+        function addNewButton() {
+            const newButton = document.createElement('button');
+            newButton.className = 'button';
+            newButton.textContent = 'Confirmer :p';
+            newButton.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
+            newButton.style.top = `${Math.random() * (window.innerHeight - 50)}px`;
+            newButton.addEventListener('click', addNewButton);
+            formContainer.appendChild(newButton);
+            moveButtons();
+        }
+
+        setInterval(moveButtons, 1500);
+
+        hiddenButton.addEventListener("click", () => {
+            alert("Bravo, vous avez réussi, DISCLAMER, LA PROCHAINE PARTIE PEUT ETRE DANGEREUSE POUR LES EPILEPTIQUES ET LES GENS SENSIBLES A LA LUMIERE !");
+            window.location.href = "birthday.html";
+        });
+
+        input.addEventListener("input", () => {
+            const text = input.value;
+            input.value = text.replace(/./g, char => {
+                if (/[a-zA-Z0-9]/.test(char)) {
+                    return String.fromCharCode(char.charCodeAt(0) + 1);
+                }
+                return char;
+            });
+        });
+
+        window.addEventListener("beforeunload", (event) => {
+            event.preventDefault();
+            localStorage.setItem("refreshDetected", "true");
+        });
+
+        document.querySelector('.form-container').addEventListener('mouseenter', () => {
+            hiddenButton.style.display = 'inline-block';
+        });
+
+        buttons.forEach(button => {
+            button.addEventListener('click', addNewButton);
+        });
+    </script>
+</body>
+</html>

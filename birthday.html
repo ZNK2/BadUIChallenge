@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            background: rgb(214, 209, 209);
+            color: #6bac9f;
+            font-family: Comic sans-serif, cursive;
+            text-align: center;
+            margin-top: 50px;
+            animation: flicker 0.5s infinite;
+        }
+        @keyframes flicker {
+            0%, 100% { background: #ff00ff; }
+            50% { background: #00ffcc; }
+        }
+        .counter {
+            font-size: 2em;
+            margin: 20px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #00ffcc;
+            color: #ff0000;
+            border: 3px solid #ff00ff;
+            cursor: pointer;
+            margin: 10px;
+            position: relative;
+            transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
+        }
+
+        #plungeButton {
+            display: none;
+        }
+        
+        audio{
+            src:"" ;
+        }
+    </style>
+</head>
+<body>
+    <h1>Laisse nous ton numéro téléphone pour qu'on puisse te lier à ton destin !</h1>
+    <div class="counter" id="counter">+0 000-000-0000</div>
+    <button onclick="increment()">meow</button>
+    <button id="plungeButton" onclick="plungeOcean()">Plonger dans l'océan</button>
+
+    <script>
+        let count = 0;
+        const counterElement = document.getElementById('counter');
+        const plungeButton = document.getElementById('plungeButton'); 
+        function increment() {
+            count++;
+            let phoneNumber = formatPhoneNumber(count);
+            counterElement.textContent = phoneNumber;
+
+            if (count === 54) {
+                plungeButton.style.display = 'inline-block'; 
+            }
+        }
+
+        function formatPhoneNumber(number) {
+            let countryCode = Math.floor(number / 10000000000);
+            let localNumber = number % 10000000000;
+            let formattedNumber = `+${countryCode} ${String(localNumber).padStart(10, '0').replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}`;
+            return formattedNumber;
+        }
+
+        function plungeOcean() {
+            window.location.href = "ouiiaiouiai.html";
+        }
+    </script>
+</body>
+</html>

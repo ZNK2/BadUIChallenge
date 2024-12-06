@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oula petit problème houston, recommence ! </title>
+    <style>
+        body {
+            background-color: #ff0000;
+            color: #ffff00;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            font-size: 50px;
+            text-shadow: 5px 5px 10px #000;
+        }
+        p {
+            font-size: 20px;
+            margin-top: 30px;
+            color: #ffffff;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #00ff00;
+            color: #000000;
+            border: 2px solid #ff00ff;
+            cursor: pointer;
+            margin-top: 50px;
+        }
+        button:hover {
+            background-color: #ff6600;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Veuillez recommencer !</h1>
+    <p>Vous avez essayé de rafraîchir la page ? Désolé, vous devez tout refaire depuis le début !</p>
+    <button onclick="window.location.href='welcome.html'">Revenir à la page d'accueil</button>
+    <script>
+        if (localStorage.getItem("refreshDetected") === "true") {
+            alert("Vous avez rafraîchi ! Mauvaise idée.");
+            localStorage.removeItem("refreshDetected");
+        }
+    </script>
+</body>
+</html>
